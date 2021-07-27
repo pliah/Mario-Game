@@ -1,0 +1,722 @@
+function MarioGame.new 0
+push constant 14
+call Memory.alloc 1
+pop pointer 0
+push argument 0
+pop this 0
+push constant 8
+push constant 128
+call Player.new 2
+pop this 1
+push constant 2
+push constant 50
+call Danger_flower.init 2
+pop temp 0
+push constant 614
+push constant 560
+push constant 3
+call Math.divide 2
+push constant 0
+call Math.multiply 2
+add
+push constant 128
+call Danger_flower.new 2
+pop this 2
+push constant 614
+push constant 560
+push constant 3
+call Math.divide 2
+push constant 1
+call Math.multiply 2
+add
+push constant 128
+call Danger_flower.new 2
+pop this 3
+push constant 614
+push constant 560
+push constant 3
+call Math.divide 2
+push constant 2
+call Math.multiply 2
+add
+push constant 128
+call Danger_flower.new 2
+pop this 4
+call Points.new 0
+pop this 5
+push pointer 0
+return
+function MarioGame.dispose 0
+push argument 0
+pop pointer 0
+push this 1
+call Player.dispose 1
+pop temp 0
+push this 2
+call Danger_flower.dispose 1
+pop temp 0
+push this 3
+call Danger_flower.dispose 1
+pop temp 0
+push this 4
+call Danger_flower.dispose 1
+pop temp 0
+push this 5
+call Points.dispose 1
+pop temp 0
+push pointer 0
+call Memory.deAlloc 1
+pop temp 0
+push constant 0
+return
+function MarioGame.handle_input 3
+push argument 0
+pop pointer 0
+call Keyboard.keyPressed 0
+pop this 6
+push this 6
+push constant 81
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+not
+pop this 9
+push constant 0
+not
+pop this 11
+label IF_FALSE0
+push this 6
+push constant 82
+eq
+push this 8
+not
+and
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+not
+pop this 9
+push constant 0
+not
+pop this 10
+label IF_FALSE1
+push this 6
+push constant 131
+eq
+push this 7
+push constant 131
+eq
+not
+and
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push this 1
+call Player.jump 1
+pop temp 0
+push this 8
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
+push constant 49
+call String.new 1
+push constant 80
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 60
+call String.appendChar 2
+push constant 45
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 116
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+push constant 99
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+push constant 112
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 100
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 38
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 45
+call String.appendChar 2
+push constant 62
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 116
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 100
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 99
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 115
+call String.appendChar 2
+push constant 112
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 100
+call String.appendChar 2
+pop local 0
+push constant 51
+call String.new 1
+push constant 67
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 117
+call String.appendChar 2
+push constant 116
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 110
+call String.appendChar 2
+push constant 58
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 102
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 121
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 117
+call String.appendChar 2
+push constant 39
+call String.appendChar 2
+push constant 108
+call String.appendChar 2
+push constant 108
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 106
+call String.appendChar 2
+push constant 117
+call String.appendChar 2
+push constant 109
+call String.appendChar 2
+push constant 112
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 116
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 104
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 103
+call String.appendChar 2
+push constant 104
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 121
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 117
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 119
+call String.appendChar 2
+push constant 105
+call String.appendChar 2
+push constant 108
+call String.appendChar 2
+push constant 108
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 102
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 108
+call String.appendChar 2
+push constant 108
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+push constant 33
+call String.appendChar 2
+pop local 1
+push constant 0
+pop this 8
+push constant 13
+push constant 162
+push constant 16
+call Math.multiply 2
+add
+push constant 512
+add
+call Images.draw_digit3 1
+pop temp 0
+push constant 1000
+call Sys.wait 1
+pop temp 0
+push constant 13
+push constant 162
+push constant 16
+call Math.multiply 2
+add
+push constant 512
+add
+call Images.draw_digit2 1
+pop temp 0
+push constant 1000
+call Sys.wait 1
+pop temp 0
+push constant 13
+push constant 162
+push constant 16
+call Math.multiply 2
+add
+push constant 512
+add
+call Images.draw_digit1 1
+pop temp 0
+push constant 1000
+call Sys.wait 1
+pop temp 0
+push constant 14
+push constant 64
+push local 0
+call String.length 1
+sub
+push constant 2
+call Math.divide 2
+call Output.moveCursor 2
+pop temp 0
+push constant 0
+pop local 2
+label WHILE_EXP0
+push local 2
+push local 0
+call String.length 1
+lt
+not
+if-goto WHILE_END0
+push constant 20
+call Sys.wait 1
+pop temp 0
+push local 0
+push local 2
+call String.charAt 2
+call Output.printChar 1
+pop temp 0
+push local 2
+push constant 1
+add
+pop local 2
+goto WHILE_EXP0
+label WHILE_END0
+push constant 18
+push constant 64
+push local 1
+call String.length 1
+sub
+push constant 2
+call Math.divide 2
+call Output.moveCursor 2
+pop temp 0
+push constant 0
+pop local 2
+label WHILE_EXP1
+push local 2
+push local 1
+call String.length 1
+lt
+not
+if-goto WHILE_END1
+push constant 20
+call Sys.wait 1
+pop temp 0
+push local 1
+push local 2
+call String.charAt 2
+call Output.printChar 1
+pop temp 0
+push local 2
+push constant 1
+add
+pop local 2
+goto WHILE_EXP1
+label WHILE_END1
+push constant 1000
+call Sys.wait 1
+pop temp 0
+call Screen.clearScreen 0
+pop temp 0
+push constant 10
+push constant 32
+push constant 16
+call Math.multiply 2
+add
+call Images.draw_title_superMario 1
+pop temp 0
+push constant 0
+call Screen.setColor 1
+pop temp 0
+label IF_FALSE3
+goto IF_END2
+label IF_FALSE2
+push this 6
+push constant 130
+eq
+push this 7
+push constant 130
+eq
+not
+and
+push this 0
+push constant 0
+gt
+and
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push this 0
+push constant 1
+sub
+pop this 0
+label IF_FALSE4
+push this 6
+push constant 132
+eq
+push this 7
+push constant 132
+eq
+not
+and
+if-goto IF_TRUE5
+goto IF_FALSE5
+label IF_TRUE5
+push this 0
+push constant 1
+add
+pop this 0
+label IF_FALSE5
+label IF_END2
+push this 6
+pop this 7
+push constant 0
+return
+function MarioGame.handle_danger_flower 0
+push argument 0
+pop pointer 0
+push argument 1
+push constant 2
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+not
+pop this 9
+goto IF_END0
+label IF_FALSE0
+push argument 1
+push constant 1
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push this 5
+push this 1
+call Points.increment 2
+pop temp 0
+label IF_FALSE1
+label IF_END0
+push constant 0
+return
+function MarioGame.refresh 0
+push argument 0
+pop pointer 0
+push this 1
+call Player.update 1
+pop temp 0
+push this 8
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 2
+call Danger_flower.update 1
+pop temp 0
+push this 3
+call Danger_flower.update 1
+pop temp 0
+push this 4
+call Danger_flower.update 1
+pop temp 0
+push pointer 0
+push this 2
+push this 1
+call Player.x 1
+push this 1
+call Player.y 1
+call Danger_flower.is_failed 3
+call MarioGame.handle_danger_flower 2
+pop temp 0
+push pointer 0
+push this 3
+push this 1
+call Player.x 1
+push this 1
+call Player.y 1
+call Danger_flower.is_failed 3
+call MarioGame.handle_danger_flower 2
+pop temp 0
+push pointer 0
+push this 4
+push this 1
+call Player.x 1
+push this 1
+call Player.y 1
+call Danger_flower.is_failed 3
+call MarioGame.handle_danger_flower 2
+pop temp 0
+label IF_FALSE0
+push constant 0
+return
+function MarioGame.run 0
+push argument 0
+pop pointer 0
+push constant 0
+pop this 6
+push constant 0
+pop this 7
+push constant 0
+not
+pop this 8
+push constant 0
+pop this 9
+push constant 0
+pop this 10
+push constant 0
+pop this 11
+push constant 0
+pop this 13
+push constant 10
+push constant 32
+push constant 16
+call Math.multiply 2
+add
+call Images.draw_title_superMario 1
+pop temp 0
+push constant 11
+push constant 96
+push constant 16
+call Math.multiply 2
+add
+call Images.draw_jump_instructions 1
+pop temp 0
+label WHILE_EXP0
+push this 9
+not
+not
+if-goto WHILE_END0
+push pointer 0
+call MarioGame.handle_input 1
+pop temp 0
+push pointer 0
+call MarioGame.refresh 1
+pop temp 0
+push this 0
+call Sys.wait 1
+pop temp 0
+goto WHILE_EXP0
+label WHILE_END0
+push this 11
+not
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+call Screen.clearScreen 0
+pop temp 0
+push constant 10
+push constant 32
+push constant 100
+call Math.multiply 2
+add
+call Images.draw_title_gameover 1
+pop temp 0
+push constant 9
+push constant 32
+push constant 160
+call Math.multiply 2
+add
+call Images.draw_title_resetkey 1
+pop temp 0
+label IF_FALSE0
+label WHILE_EXP1
+push this 10
+not
+not
+if-goto WHILE_END1
+call Keyboard.keyPressed 0
+pop this 6
+push this 6
+push constant 81
+eq
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+return
+label IF_FALSE1
+push this 6
+push constant 82
+eq
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
+push constant 0
+not
+pop this 10
+label IF_FALSE2
+goto WHILE_EXP1
+label WHILE_END1
+push pointer 0
+call MarioGame.reset 1
+pop temp 0
+push constant 0
+not
+return
+function MarioGame.reset 0
+push argument 0
+pop pointer 0
+call Screen.clearScreen 0
+pop temp 0
+push this 1
+call Player.dispose 1
+pop temp 0
+push constant 8
+push constant 128
+call Player.new 2
+pop this 1
+push this 2
+push constant 614
+push constant 560
+push constant 3
+call Math.divide 2
+push constant 0
+call Math.multiply 2
+add
+push constant 128
+call Danger_flower.reset 3
+pop temp 0
+push this 3
+push constant 614
+push constant 560
+push constant 3
+call Math.divide 2
+push constant 1
+call Math.multiply 2
+add
+push constant 128
+call Danger_flower.reset 3
+pop temp 0
+push this 4
+push constant 614
+push constant 560
+push constant 3
+call Math.divide 2
+push constant 2
+call Math.multiply 2
+add
+push constant 128
+call Danger_flower.reset 3
+pop temp 0
+push this 5
+call Points.reset 1
+pop temp 0
+push constant 0
+return

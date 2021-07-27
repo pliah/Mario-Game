@@ -1,0 +1,229 @@
+class Danger_flower {
+   static int xVel;
+   static int yGap;
+   field int xPos;
+   field int lastPosx;
+   field int lastPosy;
+   field int yPos;
+   field int tick; // internal clock
+   field int tock;//checks the rught time to draw the danger_falowers
+   field boolean coin; 
+
+   // setup the global Danger_flower options
+   function void init(int ixVel, int iyGap) {
+      let xVel = ixVel;
+      let yGap = iyGap;
+      return;
+   }
+
+   constructor Danger_flower new(int x, int y) {
+      do reset(x, y);
+      return this;
+   }
+
+   method void dispose() {
+      do Memory.deAlloc(this);
+      return;
+   }
+
+   method void draw_pipe() {
+         do Screen.setColor(true);
+         // head bottom
+         do Screen.drawRectangle(Math.min(Math.max(xPos-2,0),511), yPos+80, Math.min(Math.max(xPos+34,0),511), yPos+81);  // top side
+         do Screen.drawRectangle(Math.min(Math.max(xPos-2,0),511), yPos+100, Math.min(Math.max(xPos+34,0),511), yPos+101);  // bottom side
+         do Screen.drawRectangle(Math.min(Math.max(xPos-2,0),511), yPos+80, Math.min(Math.max(xPos-1,0),511), yPos+100);   // left side
+         do Screen.drawRectangle(Math.min(Math.max(xPos+32,0),511), yPos+80, Math.min(Math.max(xPos+33,0),511), yPos+100); // right side
+         do Screen.drawRectangle(Math.min(Math.max(xPos+29,0),511), yPos+80, Math.min(Math.max(xPos+29,0),511), yPos+100); // right shadow
+         // body bottom
+         do Screen.drawRectangle(Math.min(Math.max(xPos,0),511), yPos+100, Math.min(Math.max(xPos+1,0),511), 255);         // left wall
+         do Screen.drawRectangle(Math.min(Math.max(xPos+26,0),511), yPos+100, Math.min(Math.max(xPos+27,0),511), 255);     // right wall
+         do Screen.setColor(false);
+         // bottom
+         do Screen.drawRectangle(Math.min(Math.max(xPos,0),511), yPos+32, Math.min(Math.max(xPos+(1+xVel),0),511), yPos+53);       // clside
+         do Screen.drawRectangle(Math.min(Math.max(xPos+32,0),511), yPos+80, Math.min(Math.max(xPos+(34+xVel),0),511), yPos+101);   // crside
+         do Screen.drawRectangle(Math.min(Math.max(xPos+2,0),511), yPos+56, Math.min(Math.max(xPos+(4+xVel),0),511), 255);         // clwall
+         do Screen.drawRectangle(Math.min(Math.max(xPos+32,0),511), yPos+56, Math.min(Math.max(xPos+(34+xVel),0),511), 255);       // crwall
+      return;
+   }
+
+   method void draw_danger_flower_(){
+      var int memAddress;
+      let memAddress = 16384 + Math.multiply(32, yPos+48) + Math.divide(xPos, 16)+1;
+      let lastPosx=xPos;
+      let lastPosy=yPos+48;
+ 
+      do Memory.poke(memAddress + 0, 0);
+      do Memory.poke(memAddress + 32, 0);
+      do Memory.poke(memAddress + 64, 0);
+      do Memory.poke(memAddress + 96, 0);
+      do Memory.poke(memAddress + 128, 0);
+      do Memory.poke(memAddress + 160, 0);
+      do Memory.poke(memAddress + 192, 0);
+      do Memory.poke(memAddress + 224, 0);
+      do Memory.poke(memAddress + 256, 8196);
+      do Memory.poke(memAddress + 288, 30750);
+      do Memory.poke(memAddress + 320, 28682);
+      do Memory.poke(memAddress + 352, 23614);
+      do Memory.poke(memAddress + 384, -2017);
+      do Memory.poke(memAddress + 416, -16779);
+      do Memory.poke(memAddress + 448, -5057);
+      do Memory.poke(memAddress + 480, -2019);
+
+      do Memory.poke(memAddress + 512, -18401);
+      do Memory.poke(memAddress + 544, -389);
+      do Memory.poke(memAddress + 576, -10657);
+      do Memory.poke(memAddress + 608, 32374);
+      do Memory.poke(memAddress + 640, 30334);
+      do Memory.poke(memAddress + 672, 15980);
+      do Memory.poke(memAddress + 704, 8184);
+      do Memory.poke(memAddress + 736, 2016);
+      do Memory.poke(memAddress + 768, -15997);
+      do Memory.poke(memAddress + 800, -20083);
+      do Memory.poke(memAddress + 832, 27030);
+      do Memory.poke(memAddress + 864, 21930);
+      do Memory.poke(memAddress + 896, 9636);
+      do Memory.poke(memAddress + 928, 9164);
+      do Memory.poke(memAddress + 960, 8184);
+      do Memory.poke(memAddress + 992, 960);
+
+      
+		return;
+   }  
+   method void draw_danger_flower__del(){
+      var int memAddress;
+		let memAddress = 16384+ Math.multiply(32, lastPosy) + Math.divide(lastPosx, 16)+1;
+		do Memory.poke(memAddress + 0, 0);
+		do Memory.poke(memAddress + 32, 0);
+		do Memory.poke(memAddress + 64,0);
+		do Memory.poke(memAddress + 96, 0);
+		do Memory.poke(memAddress + 128, 0);
+		do Memory.poke(memAddress + 160, 0);
+		do Memory.poke(memAddress + 192, 0);
+		do Memory.poke(memAddress + 224, 0);
+		do Memory.poke(memAddress + 256, 0);
+		do Memory.poke(memAddress + 288, 0);
+		do Memory.poke(memAddress + 320, 0);
+		do Memory.poke(memAddress + 352, 0);
+		do Memory.poke(memAddress + 384, 0);
+		do Memory.poke(memAddress + 416, 0);
+		do Memory.poke(memAddress + 448, 0);
+		do Memory.poke(memAddress + 480, 0);
+
+		do Memory.poke(memAddress + 512, 0);
+		do Memory.poke(memAddress + 544, 0);
+		do Memory.poke(memAddress + 576,0);
+		do Memory.poke(memAddress + 608, 0);
+		do Memory.poke(memAddress + 640, 0);
+		do Memory.poke(memAddress + 672,0);
+		do Memory.poke(memAddress + 704, 0);
+		do Memory.poke(memAddress + 736,0);
+		do Memory.poke(memAddress + 768,0);
+		do Memory.poke(memAddress + 800, 0);
+		do Memory.poke(memAddress + 832, 0);
+		do Memory.poke(memAddress + 864,0);
+		do Memory.poke(memAddress + 896, 0);
+		do Memory.poke(memAddress + 928, 0);
+		do Memory.poke(memAddress + 960,0);
+		do Memory.poke(memAddress + 992,0);
+
+      do Memory.poke(memAddress + 512, 0);
+		do Memory.poke(memAddress + 544, 0);
+		do Memory.poke(memAddress + 576, 0);
+		do Memory.poke(memAddress + 608, 0);
+		do Memory.poke(memAddress + 640,0);
+		do Memory.poke(memAddress + 672, 0);
+		do Memory.poke(memAddress + 704, 0);
+		do Memory.poke(memAddress + 736, 0);
+		do Memory.poke(memAddress + 768, 0);
+		do Memory.poke(memAddress + 800, 0);
+		do Memory.poke(memAddress + 832, 0);
+		do Memory.poke(memAddress + 864, 0);
+		do Memory.poke(memAddress + 896,0);
+		do Memory.poke(memAddress + 928, 0);
+		do Memory.poke(memAddress + 960,0);
+		do Memory.poke(memAddress + 992, 0);
+
+		do Memory.poke(memAddress + 1024, 0);
+		do Memory.poke(memAddress + 1056, 0);
+		do Memory.poke(memAddress + 1088, 0);
+		do Memory.poke(memAddress + 1120, 0);
+		do Memory.poke(memAddress + 1152, 0);
+		do Memory.poke(memAddress + 1184, 0);
+		do Memory.poke(memAddress + 1216, 0);
+		do Memory.poke(memAddress + 1248, 0);
+		do Memory.poke(memAddress + 1280, 0);
+		do Memory.poke(memAddress + 1312, 0);
+		do Memory.poke(memAddress + 1344, 0);
+		do Memory.poke(memAddress + 1376, 0);
+		do Memory.poke(memAddress + 1408, 0);
+		do Memory.poke(memAddress + 1440, 0);
+		do Memory.poke(memAddress + 1472, 0);
+		do Memory.poke(memAddress + 1504, 0);
+		return;
+   }
+   method void tick() {
+      let tock = tock + 1;
+      let tick = tick + 1; 
+      if (tick = 3) {
+         let tick = 0;
+      } else {
+         let xPos = xPos - xVel;
+         // out of bounds 
+         if (xPos < (-50)) {
+            let coin = true;
+            let xPos = 514;
+            let yPos = tick*20+50;
+         }
+         // far out of bounds 
+         if (xPos > 614) {
+            let yPos = Math.min(xPos-614,tick*2)+50;
+         }
+      }
+      return;
+   }
+
+   method void update() {
+      var int x;
+      let x=xPos;
+      do tick();
+     if(tock > 380){  
+         do draw_danger_flower__del();
+         do draw_danger_flower_();
+     }
+      do draw_pipe();
+      do Screen.setColor(false);
+     
+      return;
+   }
+
+   method int x() {
+      return xPos;
+   }
+
+   method int y() {
+      return yPos;
+   }
+
+   method int is_failed(int x, int y) {
+      if ((x>(xPos-19))&(x<(xPos+44))) {  // inside Danger_flower region (left-right)
+         if ((y-50>yPos)) { // inside Danger_flower boundary (bottom-top)
+            return 2; // collision
+         }
+         if (coin) {
+            let coin = false;
+            return 1; // safe-inside-region first tick
+         }
+         else {return 0;} // safe-inside-region other tick
+      }
+      return 0; // not in Danger_flower region
+   }
+
+   method void reset(int x, int y) {
+      let xPos = x;
+      let yPos = y;
+      let tick = -1;
+      let coin = true;
+      let tock = -1;
+      return;
+   }
+}

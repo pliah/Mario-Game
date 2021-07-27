@@ -1,0 +1,131 @@
+/*
+* This class is responsible for calculating the points earned during the game.
+*/
+class Points {
+   field int total;
+   field char key;      
+   field boolean reset; 
+   constructor Points new(){
+      let total = 0;
+      return this;
+   }
+
+   method void dispose() {
+      do Memory.deAlloc(this);
+      return;
+   }
+   method void win(Player player){
+      var String message1; //Prints a victory message
+      var String message2;  
+      var String message3;  
+      var String message4;
+      var String message5;
+      var String message6;
+      var String message7;
+      var int i;
+      let message1 = "WINNER!!!!!";
+      let message2 = "you just succeded to win this gamea ";
+      let message3 = "Young man, start off now and get her back";
+      let message4 = "Defeat all the enemies";
+      let message5 = "And you will get stronger along the way";
+      let message6 = "created by  the next generation's einstein ";
+      let message7 = "PSee you on the next game!!";
+      do Screen.clearScreen();
+		do Output.moveCursor(11,10);
+		do Screen.clearScreen();
+		do Sys.wait(1000);
+		do Output.moveCursor(6, (64 - (message1.length())/2));
+		let i = 0;
+		while (i < message1.length()) {
+			do Sys.wait(20);
+			do Output.printChar(message1.charAt(i));
+			let i = i + 1;
+		}
+		do Sys.wait(1000);
+		do Output.moveCursor(8, (64 - (message2.length())/2));
+		let i = 0;
+		while (i < message2.length()) {
+			do Sys.wait(20);
+			do Output.printChar(message2.charAt(i));
+			let i = i + 1;
+		}
+		do Sys.wait(1000);
+		do Output.moveCursor(10, (64 - (message3.length())/2));
+		let i = 0;
+		while (i < message3.length()) {
+			do Sys.wait(20);
+			do Output.printChar(message3.charAt(i));
+			let i = i + 1;
+		}
+		do Sys.wait(1000);
+		do Output.moveCursor(12, (64 - (message4.length())/2));
+		let i = 0;
+		while (i < message4.length()) {
+			do Sys.wait(20);
+			do Output.printChar(message4.charAt(i));
+			let i = i + 1;
+		}
+		do Sys.wait(1000);
+		do Output.moveCursor(14, (64 - (message5.length())/2));
+		let i = 0;
+		while (i < message5.length()) {
+			do Sys.wait(20);
+			do Output.printChar(message5.charAt(i));
+			let i = i + 1;
+		}
+		do Sys.wait(1000);
+		do Output.moveCursor(18, (64 - (message6.length())/2));
+		let i = 0;
+		while (i < message6.length()) {
+			do Sys.wait(5);
+			do Output.printChar(message6.charAt(i));
+			let i = i + 1;
+		}
+		do Output.moveCursor(20, (64 - (message7.length())/2));
+		let i = 0;
+		while (i < message7.length()) {
+			do Sys.wait(5);
+			do Output.printChar(message7.charAt(i));
+			let i = i + 1;
+		}
+      do Sys.wait(2000);
+      do Screen.clearScreen();
+      do Images.draw_title_resetkey(11+(32*160));
+      do Sys.wait(2000);
+      let key=Keyboard.keyPressed();
+      while (~(key = 82)) { // R to reset the game
+         let key=Keyboard.keyPressed();
+      }
+      let reset = true;
+     
+      do String.dispose(message1);
+      do String.dispose(message2);
+      do String.dispose(message3);
+      do String.dispose(message4);
+      do String.dispose(message5);
+      do String.dispose(message6);
+      do String.dispose(message7);
+      return; 
+   }
+   // keeps track of individual digits
+   method void increment(Player player) {
+      let total = total + 1;
+      if (total > 10) {
+            do win(player);
+      }
+      do Output.moveCursor(3, 47);
+      do Output.printString("Current Points:");
+      do Output.printInt(total);
+      return;
+   }
+
+   method int value() {
+      return total;
+   }
+
+   method void reset() {
+      let total = 0;
+      return;
+   }
+
+}

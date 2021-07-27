@@ -1,0 +1,16 @@
+/*
+* Creates a game and starts playing it
+*/
+class Main {
+    function void main() {
+        var MarioGame myGame;
+        var boolean run;
+        let myGame = MarioGame.new(0);
+        let run = true;
+        while (run) {
+        	let run = myGame.run();
+        }
+        do myGame.dispose();
+        return;
+    }
+}

@@ -1,0 +1,184 @@
+/*
+*Responsible for managing the course of the game, 
+*receiving commands from the user and performs them.
+*/
+class MarioGame {
+   // game speed  
+   field int delay;
+   // objects
+   field Player player;
+   field Danger_flower danger_flower1;
+   field Danger_flower danger_flower2;
+   field Danger_flower danger_flower3;
+   field Points points;
+   // internal states
+   field char key;      
+   field char last_key;
+   field boolean first_jump;
+   field boolean exit;
+   field boolean reset;
+   field boolean quit;
+   field int danger_flower_interaction;
+   field int frames1;
+
+   constructor MarioGame new(int d) {
+      let delay = d ;
+      // initialize (allocate) objects
+      let player = Player.new(8, 128);
+      do Danger_flower.init(2, 50);
+      let danger_flower1 = Danger_flower.new(614+((560/3)*0), 128);
+      let danger_flower2 = Danger_flower.new(614+((560/3)*1), 128);
+      let danger_flower3 = Danger_flower.new(614+((560/3)*2), 128);
+      let points = Points.new();
+      return this;
+   }
+
+   method void dispose() {
+      // dispose of (deallocate) objects
+      do player.dispose();
+      do danger_flower1.dispose();
+      do danger_flower2.dispose();
+      do danger_flower3.dispose();
+      do points.dispose();
+      do Memory.deAlloc(this);
+      return;
+   }
+
+   // handler for danger_flower interactions
+   method void handle_input() {
+      var String message;
+      var String message2;
+      var int i;
+   
+      let key = Keyboard.keyPressed();
+      if (key = 81) { // Q
+         let exit = true; 
+         let quit = true;
+      }
+      if ((key = 82) & (~first_jump)) { // R
+         let exit = true; 
+         let reset = true;
+         
+      }
+      if ((key = 131) & (~(last_key=131))) { // click up arraow
+         do player.jump();
+         if (first_jump) {
+            let message = "Press <- to increase speed & -> to decrease speed";
+            let message2 = "Caution: if you'll jump too high you will fall!!!!!";
+            // first jump starts the game
+            let first_jump = false;
+            // replace title and delete instruction messages
+            do Images.draw_digit3(13+(162*16)+512);
+            do Sys.wait(1000);
+            do Images.draw_digit2(13+(162*16)+512);
+            do Sys.wait(1000);
+            do Images.draw_digit1(13+(162*16)+512);
+            do Sys.wait(1000);
+            do Output.moveCursor(14, (64 - (message.length())/2));
+            let i = 0;
+            while (i < message.length()) {
+               do Sys.wait(20);
+               do Output.printChar(message.charAt(i));
+               let i = i + 1;
+            }
+            	do Output.moveCursor(18, (64 - (message2.length())/2));
+            let i = 0;
+            while (i < message2.length()) {
+               do Sys.wait(20);
+               do Output.printChar(message2.charAt(i));
+               let i = i + 1;
+            }
+            do Sys.wait(1000);
+            do Screen.clearScreen();
+            do Images.draw_title_superMario(10+(32*16));
+            do Screen.setColor(false);
+         }
+      } else {
+        
+         if (((key = 130) & (~(last_key=130))) & (delay > 0)) { let delay = delay - 1; } // left arrow
+         if ((key = 132) & (~(last_key=132))) { let delay = delay + 1; }   // right arrow
+      }
+      let last_key = key;
+      
+      return;
+   }
+   method void handle_danger_flower(int danger_flower_interaction) {
+      if (danger_flower_interaction=2) { // Collision
+         let exit = true;
+      } else {
+         if (danger_flower_interaction=1) { // Passing by
+            do points.increment(player);
+         }
+      }
+      return;
+   }
+
+   // update all active objects every frame
+   method void refresh() {
+      // update player animation
+      do player.update();  
+      if ((~first_jump)) { 
+         // update danger_flowers 
+         do danger_flower1.update();
+         do danger_flower2.update();
+         do danger_flower3.update();
+         // handle player-danger_flower fails
+         do handle_danger_flower(danger_flower1.is_failed(player.x(),player.y()));
+         do handle_danger_flower(danger_flower2.is_failed(player.x(),player.y()));
+         do handle_danger_flower(danger_flower3.is_failed(player.x(),player.y()));
+      }
+      return;
+   }
+   // the main game control
+   method boolean run() {
+      // init all variables
+      let key = 0;
+      let last_key = 0;
+      let first_jump = true;
+      let exit = false;
+      let reset = false;
+      let quit = false;
+      let frames1 = 0;
+
+      // draw the introductory messages
+      do Images.draw_title_superMario(10+(32*16));
+      do Images.draw_jump_instructions(11+(96*16));
+      // enter the play loop
+      while (~exit) {
+         // game logic and render
+         do handle_input();
+         do refresh();
+         // handle profiling, clock and delays
+         do Sys.wait(delay);
+      }
+      if ((~quit)) { // write "Game Over" if allowed to restart (not quitting)
+         do Screen.clearScreen();
+         do Images.draw_title_gameover(10+(32*100));
+         do Images.draw_title_resetkey(9+(32*160));
+      }
+      // wait to confirm reset, or to quit
+      while ((~reset)) {
+         let key = Keyboard.keyPressed();
+         if (key = 81) { // Q to quit
+            return false;
+         }
+         if (key = 82) { // R to reset
+            let reset = true;
+         }
+      } 
+      do reset();  
+      return true;
+   }
+
+   // recycle already allocated objects upon restart
+   method void reset() {
+      do Screen.clearScreen();
+      do player.dispose();
+      let player = Player.new(8, 128);
+      do danger_flower1.reset(614+((560/3)*0), 128);
+      do danger_flower2.reset(614+((560/3)*1), 128);
+      do danger_flower3.reset(614+((560/3)*2), 128);
+      do points.reset();
+      return;
+   }
+}
