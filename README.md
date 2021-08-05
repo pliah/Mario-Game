@@ -28,6 +28,6 @@ run on the Hack hardware platform.
 
 Play the game!
 
-![mario_game_real_vidio](https://user-images.githubusercontent.com/86184951/128366574-b6afffb7-857e-4722-af6d-c237f4dd3062.gif)
+![mario_game_real_vidio](https://user-images.githubusercontent.com/86184951/128366574-b6afffb7-857e-4722-af6d-c237f4dd3062.mp3)
 
 
