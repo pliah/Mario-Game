@@ -1,4 +1,3 @@
-
 # Mario game
 
 
@@ -29,5 +28,6 @@ run on the Hack hardware platform.
 
 Play the game!
 
-https://user-images.githubusercontent.com/86184951/128366286-3a8fe958-ace9-4f98-9fc9-f751b9b5ca0a.mp4
+![mario_game_real_vidio](https://user-images.githubusercontent.com/86184951/128366574-b6afffb7-857e-4722-af6d-c237f4dd3062.gif)
+
 
