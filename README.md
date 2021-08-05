@@ -26,11 +26,10 @@ run on the Hack hardware platform.
 4. In the toolbar, click the double right arrows (3rd icon)
 
 
-Play the game!
+### Demo
+![realrealrealmario](https://user-images.githubusercontent.com/86184951/128378131-5e592f58-033d-4139-9a3a-3ecfb00aa077.gif)
 
-
-
-https://user-images.githubusercontent.com/86184951/128366907-47f1c9e8-8afc-4cf3-b9b3-8e9f10a685e4.mp4
+Have fun!
 
 
 
